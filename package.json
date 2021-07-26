@@ -6,7 +6,8 @@
     "dev": "WATCH=true node scripts/build.js",
     "build": "node scripts/build.js",
     "test:watch": "npm config set group=default && npm config set element=\"*\" && web-test-runner \"elements/*/test/$npm_config_element.spec.js\" --node-resolve --playwright --watch --group=$npm_config_group",
-    "test:ci": "web-test-runner --node-resolve --playwright"
+    "test:ci": "web-test-runner --node-resolve --playwright",
+    "postinstall": "lerna bootstrap"
   },
   "type": "module",
   "devDependencies": {
