@@ -1,8 +1,8 @@
 import { expect, elementUpdated } from "@open-wc/testing/index-no-side-effects";
 import { setViewport } from '@web/test-runner-commands';
-import { spy } from "sinon";
 import { createFixture } from "../../../test/utils/create-fixture";
 import { PfeModal } from "../dist/pfe-modal.js";
+import "../../pfe-button/dist/pfe-button.js";
 
 // One element, defined here, is used
 // in multiple tests. It's torn down and recreated each time.
@@ -90,10 +90,9 @@ describe("<pfe-modal>", () => {
     `);
     const modalWindow = el.shadowRoot.querySelector('.pfe-modal__window');
     const button = el.shadowRoot.querySelector('.pfe-modal__close');
-    const trigger = el.querySelector('[slot=pfe-modal--trigger');
+    const trigger = el.querySelector('[slot=pfe-modal--trigger]');
 
     trigger.click();
-
     expect(modalWindow.hasAttribute('hidden')).to.not.be.true;
 
     // reset

@@ -80,7 +80,6 @@ export class PfeModal extends PFElement {
   }
 
   open(event) {
-    console.log(event)
     if (event) {
       event.preventDefault();
       this.trigger = event ? event.target : window.event.srcElement;
@@ -139,7 +138,7 @@ export class PfeModal extends PFElement {
 
   render() {
     return html`
-      <span class="pfe-modal__trigger" @click=${this.toggle}>
+      <span class="pfe-modal__trigger" @click=${this.open}>
         <slot name="pfe-modal--trigger"></slot>
       </span>
       <section class="pfe-modal__outer" hidden>
