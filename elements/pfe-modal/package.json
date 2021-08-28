@@ -1,7 +1,7 @@
 {
   "name": "@patternfly/pfe-modal",
   "version": "2.0.0",
-  "description": "> TODO: description",
+  "description": "Modal element for PatternFly Elements",
   "type": "module",
   "main": "dist/pfe-modal",
   "module": "dist/pfe-modal",
