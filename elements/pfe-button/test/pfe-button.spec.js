@@ -23,7 +23,7 @@ const attributeElement = `
 
 const denyAttributeElement = `
   <pfe-button>
-    <button style="background: red;">Button</button
+    <button style="background: red;">Button</button>
   </pfe-button>
 `;
 

@@ -305,8 +305,10 @@ export class PFElement extends LitElement {
    * A wrapper around an event dispatch to standardize formatting.
    */
    emitEvent(name: string, { bubbles = true, cancelable = false, composed = true, detail = {} } = {}) {
-    if (detail) this.log(`Custom event: ${name}`, JSON.stringify(detail));
-    else this.log(`Custom event: ${name}`);
+    // @todo: throwing the following error:
+    //        TypeError: Converting circular structure to JSON
+    // if (detail) this.log(`Custom event: ${name}`, JSON.stringify(detail));
+    this.log(`Custom event: ${name}`);
 
     this.dispatchEvent(
       new CustomEvent(name, {
