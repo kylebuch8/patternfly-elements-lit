@@ -1,4 +1,4 @@
-import { LitElement, html, css, svg } from "lit";
+import { LitElement, html, css } from "lit";
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { autoReveal } from "./reveal";
 
@@ -324,4 +324,4 @@ export class PFElement extends LitElement {
 
 autoReveal(PFElement.log);
 
-export { html, css, svg, unsafeSVG };
+export { html, css, unsafeSVG };
