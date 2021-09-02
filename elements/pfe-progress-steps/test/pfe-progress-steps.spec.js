@@ -25,7 +25,6 @@ const element =
    </pfe-progress-steps>
    `;
 
-   // @TODO pfe-progress-steps needs more tests written
 describe("<pfe-progress-steps>", () => {
 
     it("it should upgrade", async () => {
