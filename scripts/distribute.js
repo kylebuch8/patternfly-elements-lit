@@ -11,6 +11,7 @@
 import { readdirSync } from "fs";
 import { resolve } from "path";
 import esbuild from "esbuild";
+import glob from "glob";
 import rewritePaths from "./utilities/esbuild-plugins/rewrite-paths/index.js";
 
 const entryPointFilesExcludes = [
@@ -19,7 +20,7 @@ const entryPointFilesExcludes = [
 
 const entryPoints = readdirSync(resolve("elements"), { withFileTypes: true })
   .filter(dirent => dirent.isDirectory() && !entryPointFilesExcludes.includes(dirent.name))
-  .map(dirent => `elements/${dirent.name}/dist/${dirent.name}.js`);
+  .flatMap(dirent => glob.sync(`elements/${dirent.name}/dist/**.js`));
 
 esbuild.build({
   entryPoints,

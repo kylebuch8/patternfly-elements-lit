@@ -19,7 +19,6 @@ const entryPointFilesExcludes = [
 const entryPoints = readdirSync(resolve("elements"), { withFileTypes: true })
   .filter(dirent => dirent.isDirectory() && !entryPointFilesExcludes.includes(dirent.name))
   .flatMap(dirent => glob.sync(`elements/${dirent.name}/src/**.ts`));
-  // .map(dirent => `elements/${dirent.name}/src/${dirent.name}.ts`);
 
 esbuild.build({
   entryPoints,
