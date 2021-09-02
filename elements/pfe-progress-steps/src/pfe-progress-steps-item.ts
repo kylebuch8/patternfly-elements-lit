@@ -156,12 +156,3 @@ export class PfeProgressStepsItem extends PFElement {
 }
 
 PFElement.create(PfeProgressStepsItem);
-			// ${this.hasSlot("title") || this.hasSlot("description") ? `
-			// <div class="pfe-progress-steps-item__content">${this.hasSlot("title") ? `
-			// 		<div class="pfe-progress-steps-item__content--title">
-			// 				<slot name="title"></slot>
-			// 		</div>` : ""}${this.hasSlot("description") ? `
-			// 		<div class="pfe-progress-steps-item__content--description">
-			// 				<slot name="description"></slot>
-			// 		</div>` : ""}
-			// </div>` : ""}
