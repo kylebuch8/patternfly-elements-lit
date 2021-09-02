@@ -2,34 +2,34 @@ import { PFElement, html, unsafeSVG } from "@patternfly/pfelement";
 import styles from "./pfe-progress-steps-item.scss";
 
 export class PfeProgressStepsItem extends PFElement {
-	static styles = styles;
+  static styles = styles;
 
-	static get tag() {
-		return "pfe-progress-steps-item";
-	}
+  static get tag() {
+    return "pfe-progress-steps-item";
+  }
 
-	static get properties() {
+  static get properties() {
     return {
-			/**
-			 * @enum ["inactive", "done", "error"]
-			 */
+      /**
+       * @enum ["inactive", "done", "error"]
+       */
       state: {
         type: String,
-				reflect: true
+        reflect: true
       },
       vertical: {
         type: Boolean,
-				reflect: true
+        reflect: true
       },
       current: {
         type: Boolean,
-				reflect: true,
+        reflect: true,
         observer: "_currentHandler",
       },
     };
   }
 
-	get icon() {
+  get icon() {
     if (this.state === "done") {
       return `<svg height="100%" width="100%" viewBox="0 0 512 512" aria-hidden="true" role="img" aria-describedby="pf-tooltip-183" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>`;
     }
@@ -39,7 +39,7 @@ export class PfeProgressStepsItem extends PFElement {
     return ``;
   }
 
-	set isLink(state) {
+  set isLink(state) {
     // Convert to boolean if not already
     state = Boolean(state);
 
@@ -57,11 +57,11 @@ export class PfeProgressStepsItem extends PFElement {
     }
   }
 
-	constructor() {
-		super();
-		this.state = "inactive";
-		this.vertical = false;
-		this.current = false;
+  constructor() {
+    super();
+    this.state = "inactive";
+    this.vertical = false;
+    this.current = false;
     // programatically generate a link based on slot
     this.isLink = false;
     // programatically skip links based on state
@@ -71,9 +71,9 @@ export class PfeProgressStepsItem extends PFElement {
     this.addEventListener("keydown", this._keydownHandler.bind(this));
   }
 
-	firstUpdate() {
-		this._build();
-	}
+  firstUpdate() {
+    this._build();
+  }
 
   updated(changedProperties) {
     changedProperties.forEach((oldValue, property) => {
@@ -88,7 +88,7 @@ export class PfeProgressStepsItem extends PFElement {
     });
   }
 
-	disconnectedCallback() {
+  disconnectedCallback() {
     this.removeEventListener("click", this._clickHandler.bind(this));
     this.removeEventListener("keydown", this._keydownHandler.bind(this));
   }
@@ -111,7 +111,7 @@ export class PfeProgressStepsItem extends PFElement {
     } else this.isLink = false;
   }
 
-	_currentHandler(oldVal, newVal) {
+  _currentHandler(oldVal, newVal) {
     if (oldVal === newVal) return;
 
     if (newVal) this.setAttribute("aria-current", "true");
@@ -140,8 +140,8 @@ export class PfeProgressStepsItem extends PFElement {
     }
   }
 
-	render() {
-		return html`
+  render() {
+    return html`
 			<div class="pfe-progress-steps-item__circle">${unsafeSVG(this.icon)}</div>
 			<div class="pfe-progress-steps-item__content">
 			  <div class="pfe-progress-steps-item__content--title">
@@ -152,7 +152,7 @@ export class PfeProgressStepsItem extends PFElement {
         </div>
       </div>
     `;
-	}
+  }
 }
 
 PFElement.create(PfeProgressStepsItem);
