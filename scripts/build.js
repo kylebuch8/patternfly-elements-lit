@@ -1,7 +1,10 @@
 import { readdirSync } from "fs";
-import { resolve } from "path";
+import { resolve, join } from "path";
+import glob from "glob";
 import esbuild from "esbuild";
+import { nodeExternalsPlugin } from 'esbuild-node-externals';
 import scssTransform from "./utilities/esbuild-plugins/scss-transform/index.js";
+import externalSubComponents from "./utilities/esbuild-plugins/external-sub-components/index.js";
 
 // exclude pfelement and pfe-sass because there are two different build
 // steps: one for pfe-sass and one for pfelement
@@ -15,7 +18,7 @@ const entryPointFilesExcludes = [
 // TypeScript src file for each element
 const entryPoints = readdirSync(resolve("elements"), { withFileTypes: true })
   .filter(dirent => dirent.isDirectory() && !entryPointFilesExcludes.includes(dirent.name))
-  .map(dirent => `elements/${dirent.name}/src/${dirent.name}.ts`);
+  .flatMap(dirent => glob.sync(`elements/${dirent.name}/src/**.ts`));
 
 esbuild.build({
   entryPoints,
@@ -25,7 +28,7 @@ esbuild.build({
   format: "esm",
   allowOverwrite: true,
   bundle: true,
-  external: ["@patternfly*", "lit*",],
+  external: ["@patternfly*"],
   // splitting: true,
   treeShaking: true,
   legalComments: "linked",
@@ -38,7 +41,12 @@ esbuild.build({
   // minify: true,
   sourcemap: true,
   plugins: [
-    scssTransform()
+    // import scss files
+    scssTransform(),
+    // ignore sub components bundling like "pfe-progress-steps-item"
+    externalSubComponents,
+    // don't bundle node_module dependencies
+    nodeExternalsPlugin(entryPoints.map(dir => join(dir, 'package.json'))),
   ]
 }).then(result => result.stop)
   .catch(error => console.error(error));
